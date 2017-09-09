@@ -1,4 +1,4 @@
-// Copyright 2011 Google Inc. All Rights Reserved.
+﻿// Copyright 2011 Google Inc. All Rights Reserved.
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -40,6 +40,8 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include <intrin.h>
 
 #ifdef HAVE_SYS_MMAN_H
 #include <sys/mman.h>

@@ -344,7 +344,7 @@ Status Win32SequentialFile::Read( size_t n, Slice* result, char* scratch )
 {
     Status sRet;
     DWORD hasRead = 0;
-    if(_hFile && ReadFile(_hFile,scratch,n,&hasRead,NULL) ){
+    if(_hFile && ReadFile(_hFile,scratch,(DWORD) n,&hasRead,NULL) ){
         *result = Slice(scratch,hasRead);
     } else {
         sRet = Status::IOError(_filename, Win32::GetLastErrSz() );
@@ -411,7 +411,7 @@ Status Win32RandomAccessFile::Read(uint64_t offset,size_t n,Slice* result,char* 
     ol.Offset = (DWORD)offset;
     ol.OffsetHigh = (DWORD)(offset >> 32);
     DWORD hasRead = 0;
-    if(!ReadFile(_hFile,scratch,n,&hasRead,&ol))
+    if(!ReadFile(_hFile,scratch,(DWORD) n,&hasRead,&ol))
         sRet = Status::IOError(_filename,Win32::GetLastErrSz());
     else
         *result = Slice(scratch,hasRead);
