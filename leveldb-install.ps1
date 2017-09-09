@@ -1,6 +1,6 @@
 #--- Install Resolve-MsBuild, Invoke-MsBuild
-Write-Output ("Installing Resolve-MsBuild...")
-Install-Script Resolve-MsBuild -Force
+Write-Output ("Installing PackageProvider NuGet")
+Install-PackageProvider NuGet -Force
 Write-Output ("Installing Invoke-MsBuild...")
 Install-Module Invoke-MsBuild -Force
 
@@ -8,13 +8,10 @@ Install-Module Invoke-MsBuild -Force
 Write-Output ("Start to Build...")
 $dir = Resolve-Path .
 $target = Resolve-Path .\leveldb_ext.sln
-$msbuild_path = Resolve-MSBuild.ps1
-Write-Output ("MsBuild Path : $msbuild_path")
 Write-Output ("Target Path : $target")
 # build
 $buildResult = Invoke-MsBuild -Path $target `
--Params "/target:Clean;Build /property:Configuration=Release;Platform=x64;BuildInParallel=true /verbosity:Detailed /maxcpucount" `
--BuildLogDirectoryPath "$dir\buildlogs"
+-Params "/target:Clean;Build /property:Configuration=Release;Platform=x64;BuildInParallel=true /verbosity:Detailed /maxcpucount" 
 
 Start-Sleep -s 1
 
